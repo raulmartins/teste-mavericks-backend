@@ -1,7 +1,7 @@
 const express = require("express");
 const routes = express.Router();
+const Controllers = require("./app/controllers/");
 
-routes.get(
-  "/orders",
-  expressAsyncHandler(controllers.PurchaseController.index)
-);
+routes.get("/order", Controllers.OrderController.index);
+
+module.exports = routes;
