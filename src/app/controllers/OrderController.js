@@ -4,7 +4,7 @@ class OrderController {
   async index(req, res) {
     const response = await axios.get("/v2/orders");
     const { orders } = response.data;
-    res.json(paginate(orders, req.query.page_size, req.query.page_number));
+    res.json(orders); //paginate(orders, req.query.page);
   }
 
   async show(req, res) {
@@ -13,8 +13,8 @@ class OrderController {
     res.json(response.data);
   }
 }
-function paginate(array, page_size, page_number) {
-  --page_number;
-  return array.slice(page_number * page_size, (page_number + 1) * page_size);
-}
+// function paginate(array, page) {
+//   --page;
+//   return array.slice(page * 4, (page + 1) * 4);
+// }
 module.exports = new OrderController();
