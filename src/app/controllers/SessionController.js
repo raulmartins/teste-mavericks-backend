@@ -10,18 +10,22 @@ class SessionController {
     };
     const { username, password } = req.body;
 
-    const response = await axios.post(
-      '/oauth/token',
-      qs.stringify({
-        client_id: 'APP-H1DR0RPHV7SP',
-        grant_type: 'password',
-        username,
-        password,
-        scope: 'APP_ADMIN',
-      }),
-      config,
-    );
-    res.json(response.data);
+    try {
+      const response = await axios.post(
+        '/oauth/token',
+        qs.stringify({
+          client_id: 'APP-H1DR0RPHV7SP',
+          grant_type: 'password',
+          username,
+          password,
+          scope: 'APP_ADMIN',
+        }),
+        config,
+      );
+      res.json(response.data);
+    } catch (err) {
+      return res.status(401).json({ error: 'login failed' });
+    }
   }
 }
 
